@@ -1,0 +1,78 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<h2 class="text-center">{{title}}</h2>
+<div class="form-group">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+        <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Operations</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let movie of movieData$ | async">
+                <td>{{movie.id}}</td>
+                <td>{{movie.name}}</td>
+                <td>{{movie.genre}}</td>
+                <td>
+                  <button type="button" class="btn btn-danger" (click)="deleteMovie(movie.id)">Delete</button>
+                  <button type="button" class="btn btn-success" (click)="open(content,movie.id,movie.name,movie.genre)">Update</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>  
+    </div>
+    <div class="col-md-4">
+      <form #fo="ngForm" (ngSubmit)="addMovie(fo)">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" ngModel>
+        </div>
+        <div class="form-group">
+            <label>Genre</label>
+            <input type="text" class="form-control" name="genre" ngModel>
+        </div>
+          <div class="form-group">
+              <label>Id:</label>
+              <input type="number" class="form-control" name="id" ngModel>
+          </div>
+        <button type="submit" class="btn btn-primary">Add movie</button>
+      </form>  
+    </div>  
+  </div>  
+</div>
+
+<!-- Modal -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" [(ngModel)]="name">
+            </div>
+            <div class="form-group">
+                <label>Genre</label>
+                <input type="text" class="form-control" name="genre" [(ngModel)]="genre">
+            </div>
+              <div class="form-group">
+                  <label>Id:</label>
+                  <input type=disabled class="form-control" name="id" [(ngModel)]="id" readonly>
+              </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="brn btn-primary" (click)="updateMovie(f)">Update</button>
+      <button type="button" class="btn btn-dark" (click)="c('Close click')">Close</button>
+    </div>
+  </ng-template>
