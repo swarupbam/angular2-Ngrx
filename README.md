@@ -9,3 +9,5 @@ The app demonstrates the the CRUD operations such as ADD,UPDATE and REMOVE.The a
 npm install bootstrap@next
 
 npm install --save @ng-bootstrap/ng-bootstrap
+
+![Screenshot](working.gif)
